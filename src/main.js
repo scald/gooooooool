@@ -1,5 +1,5 @@
 var SHOW_LOGS = true;
-var ACCESS_TOKEN = '94ddb51daf55545f2466a526bc2af3a44216fb40';
+var ACCESS_TOKEN = 'fb1a3ec784cdc6c0ad71a27bed03f84d09b83624';
 var DEVICE_ID = '53ff6c066667574830391267';
 
 /******************************** Web *****************************************/
@@ -30,14 +30,14 @@ function log(message) {
  */
 var spark = function(functionName) {
   // Construct URL
-  var url = 'https://api.spark.io/v1/devices/' + DEVICE_ID + '/CMD?args=' + functionName + '&access_token=' + ACCESS_TOKEN;
+  var url = 'https://api.spark.io/v1/devices/' + DEVICE_ID + '/CMD?access_token=' + ACCESS_TOKEN;
   log(url);
 
   // Make request (XHR does not appear to work with Spark Cloud)
   $.ajax({
     type: 'POST',
     url: url,
-    data: {'args':'none'},
+    data: {'args':functionName},
     success: function(data) {
 		log('spark() successful: ' + JSON.stringify(data));
 		Pebble.sendAppMessage({
@@ -90,6 +90,9 @@ Pebble.addEventListener('appmessage',
 			break;
 		case 7:
 			spark('LEFT_DEINIT');
+			break;
+		case 8:
+			spark('SHAKE');
 			break;
 		}
 	}

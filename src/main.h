@@ -13,3 +13,4 @@ bool left_invert = false;
 #define DOWN_D 5
 #define LEFT 6
 #define LEFT_D 7
+#define SHAKE 8

@@ -12,14 +12,8 @@
     "resources": {
         "media": [
             {
-                "file": "images/spark.png",
-                "menuIcon": true,
-                "name": "MENU_ICON",
-                "type": "png"
-            },
-            {
-                "file": "images/arrow_next.png",
-                "name": "IMAGE_ARROW_NEXT",
+                "file": "images/arrow_up.png",
+                "name": "IMAGE_ARROW_UP",
                 "type": "png"
             },
             {
@@ -28,8 +22,14 @@
                 "type": "png"
             },
             {
-                "file": "images/arrow_up.png",
-                "name": "IMAGE_ARROW_UP",
+                "file": "images/arrow_next.png",
+                "name": "IMAGE_ARROW_NEXT",
+                "type": "png"
+            },
+            {
+                "file": "images/spark.png",
+                "menuIcon": true,
+                "name": "MENU_ICON",
                 "type": "png"
             }
         ]

@@ -63,6 +63,12 @@ void left(ClickRecognizerRef recognizer, void *context){
 	}
 }
 
+void shake_handler(AccelAxisType axis, int32_t direction){
+	text_layer_set_text(info_layer, "Shake it like a polaroid picture!");
+	callback_waiting();
+	send_pulse(SHAKE);
+}
+
 void got_data(DictionaryIterator *iter, void *context){
 	Tuple *t = dict_read_first(iter);
 	switch(t->key){
@@ -98,7 +104,7 @@ void window_load_main(Window *w){
 	text_layer_set_font(info_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28));
 	layer_add_child(window_get_root_layer(w), text_layer_get_layer(info_layer));
 	
-	status_layer = text_layer_create(GRect(2, 50, 120, 168));
+	status_layer = text_layer_create(GRect(2, 90, 120, 168));
 	text_layer_set_text_alignment(status_layer, GTextAlignmentLeft);
 	text_layer_set_background_color(status_layer, GColorClear);
 	text_layer_set_font(status_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
@@ -120,6 +126,8 @@ void init(){
 		.unload = window_unload_main,
 	});
 	window_stack_push(main_window, true);
+	
+	accel_tap_service_subscribe(shake_handler);
 	
 	app_message_register_inbox_received(got_data);
 	app_message_open(512, 512);
