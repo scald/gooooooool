@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "edwin",
+    "longName": "Get Spark'd",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "shortName": "Get Spark'd",
+    "uuid": "21ed4c03-970b-45b0-b6ab-95ceef604445",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
