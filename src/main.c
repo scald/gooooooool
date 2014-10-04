@@ -9,45 +9,56 @@ void send_pulse(uint8_t toSend){
 
 	app_message_outbox_send();
 }
+
+void callback_waiting(){
+	text_layer_set_text(status_layer, "Waiting on response...");
+}
 	
 void up_init(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Up init");
+	text_layer_set_text(info_layer, "Up: init");
+	callback_waiting();
 	send_pulse(FORWARD);
 }
 
 void up_deinit(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Up deinit");
+	text_layer_set_text(info_layer, "Up: deinit");
+	callback_waiting();
 	send_pulse(FORWARD_D);
 }
 
 void down_init(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Down init");
+	text_layer_set_text(info_layer, "Down: init");
+	callback_waiting();
 	send_pulse(DOWN);
 }
 
 void down_deinit(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Down deinit");
+	text_layer_set_text(info_layer, "Down: deinit");
+	callback_waiting();
 	send_pulse(DOWN_D);
 }
 
 void right_init(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Right init");
+	callback_waiting();
 	send_pulse(RIGHT);
 }
 
 void right_deinit(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Right deinit");
+	text_layer_set_text(info_layer, "Right: deinit");
+	callback_waiting();
 	send_pulse(RIGHT_D);
 }
 
 void left(ClickRecognizerRef recognizer, void *context){
 	left_invert = !left_invert;
+	callback_waiting();
 	if(left_invert){
-		text_layer_set_text(info_layer, "Left init");
+		text_layer_set_text(info_layer, "Left: init");
 		send_pulse(LEFT);
 	}
 	else{
-		text_layer_set_text(info_layer, "Left deinit");
+		text_layer_set_text(info_layer, "Left: deinit");
 		send_pulse(LEFT_D);
 	}
 }
@@ -57,10 +68,10 @@ void got_data(DictionaryIterator *iter, void *context){
 	switch(t->key){
 		case 10:
 			if(t->value->int32 == 1){
-				text_layer_set_text(status_layer, "Success");
+				text_layer_set_text(status_layer, "Success.");
 			}
 			else{
-				text_layer_set_text(status_layer, "Fail");
+				text_layer_set_text(status_layer, "Fail!");
 			}
 			break;
 	}
