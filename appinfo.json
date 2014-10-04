@@ -1,6 +1,7 @@
 {
     "appKeys": {
-        "message_type": 99
+        "message_type": 99,
+        "pulse": 10
     },
     "capabilities": [
         ""

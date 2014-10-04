@@ -40,9 +40,15 @@ var spark = function(functionName) {
     data: {'args':'none'},
     success: function(data) {
 		log('spark() successful: ' + JSON.stringify(data));
+		Pebble.sendAppMessage({
+			"pulse":1
+		});
     },
     error: function(e) {
 		log('Failed: ' + JSON.stringify(e));
+		Pebble.sendAppMessage({
+			"pulse":0
+		});
     },
     dataType: 'json'
   });

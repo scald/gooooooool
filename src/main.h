@@ -1,7 +1,7 @@
 #include <pebble.h>
 Window *main_window;
 ActionBarLayer *main_ab;
-TextLayer *info_layer;
+TextLayer *info_layer, *status_layer;
 InverterLayer *main_theme;
 bool left_invert = false;
 
