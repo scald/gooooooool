@@ -1,0 +1,1 @@
+curl https://api.spark.io/v1/devices/53ff6c066667574830391267/up -d access_token=94ddb51daf55545f2466a526bc2af3a44216fb40
