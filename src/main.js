@@ -30,7 +30,7 @@ function log(message) {
  */
 var spark = function(functionName) {
   // Construct URL
-  var url = 'https://api.spark.io/v1/devices/' + DEVICE_ID + '/' + functionName + '?access_token=' + ACCESS_TOKEN;
+  var url = 'https://api.spark.io/v1/devices/' + DEVICE_ID + '/CMD?args=' + functionName + '&access_token=' + ACCESS_TOKEN;
   log(url);
 
   // Make request (XHR does not appear to work with Spark Cloud)
