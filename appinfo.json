@@ -1,0 +1,44 @@
+{
+    "appKeys": {
+        "message_type": 99,
+        "pulse": 10
+    },
+    "capabilities": [
+        ""
+    ],
+    "companyName": "edwin",
+    "longName": "Get Spark'd",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/spark.png",
+                "menuIcon": true,
+                "name": "MENU_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/arrow_next.png",
+                "name": "IMAGE_ARROW_NEXT",
+                "type": "png"
+            },
+            {
+                "file": "images/arrow_down.png",
+                "name": "IMAGE_ARROW_DOWN",
+                "type": "png"
+            },
+            {
+                "file": "images/arrow_up.png",
+                "name": "IMAGE_ARROW_UP",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Get Spark'd",
+    "uuid": "21ed4c03-970b-45b0-b6ab-95ceef604445",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
