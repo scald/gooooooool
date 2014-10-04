@@ -1,26 +1,65 @@
 #include <pebble.h>
 #include "main.h"
 	
-void up(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Up");
+void send_pulse(uint8_t toSend){
+	DictionaryIterator *iter;
+	app_message_outbox_begin(&iter);
+
+	dict_write_uint8(iter, 99, toSend);
+
+	app_message_outbox_send();
+}
+	
+void up_init(ClickRecognizerRef recognizer, void *context){
+	text_layer_set_text(info_layer, "Up init");
+	send_pulse(FORWARD);
 }
 
-void down(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Down");
+void up_deinit(ClickRecognizerRef recognizer, void *context){
+	text_layer_set_text(info_layer, "Up deinit");
+	send_pulse(FORWARD_D);
 }
 
-void right(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Right");
+void down_init(ClickRecognizerRef recognizer, void *context){
+	text_layer_set_text(info_layer, "Down init");
+	send_pulse(DOWN);
+}
+
+void down_deinit(ClickRecognizerRef recognizer, void *context){
+	text_layer_set_text(info_layer, "Down deinit");
+	send_pulse(DOWN_D);
+}
+
+void right_init(ClickRecognizerRef recognizer, void *context){
+	text_layer_set_text(info_layer, "Right init");
+	send_pulse(RIGHT);
+}
+
+void right_deinit(ClickRecognizerRef recognizer, void *context){
+	text_layer_set_text(info_layer, "Right deinit");
+	send_pulse(RIGHT_D);
 }
 
 void left(ClickRecognizerRef recognizer, void *context){
-	text_layer_set_text(info_layer, "Left");
+	left_invert = !left_invert;
+	if(left_invert){
+		text_layer_set_text(info_layer, "Left init");
+		send_pulse(LEFT);
+	}
+	else{
+		text_layer_set_text(info_layer, "Left deinit");
+		send_pulse(LEFT_D);
+	}
+}
+
+void got_data(DictionaryIterator *iter, void *context){
+	
 }
 	
 void click_config(ClickRecognizerRef click){
-	window_single_repeating_click_subscribe(BUTTON_ID_UP, 50, up);
-	window_single_repeating_click_subscribe(BUTTON_ID_DOWN, 50, down);
-	window_single_repeating_click_subscribe(BUTTON_ID_SELECT, 50, right);
+	window_long_click_subscribe(BUTTON_ID_UP, 10, up_init, up_deinit);
+	window_long_click_subscribe(BUTTON_ID_DOWN, 10, down_init, down_deinit);
+	window_long_click_subscribe(BUTTON_ID_SELECT, 10, right_init, right_deinit);
 	window_single_click_subscribe(BUTTON_ID_BACK, left);
 }
 	
@@ -54,6 +93,9 @@ void init(){
 		.unload = window_unload_main,
 	});
 	window_stack_push(main_window, true);
+	
+	app_message_register_inbox_received(got_data);
+	app_message_open(512, 512);
 }
 
 void deinit(){

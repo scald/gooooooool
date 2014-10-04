@@ -1,5 +1,7 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "message_type": 99
+    },
     "capabilities": [
         ""
     ],
