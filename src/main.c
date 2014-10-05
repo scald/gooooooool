@@ -1,5 +1,6 @@
 #include <pebble.h>
 #include "main.h"
+// #include "strap/strap.h"
 	
 void send_pulse(uint8_t toSend){
 	DictionaryIterator *iter;
@@ -18,36 +19,47 @@ void up_init(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Up: init");
 	callback_waiting();
 	send_pulse(FORWARD);
+	// strap_log_event("/drive/forwards");
 }
 
 void up_deinit(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Up: deinit");
 	callback_waiting();
 	send_pulse(FORWARD_D);
+	// strap_log_event("/stop");
+
 }
 
 void down_init(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Down: init");
 	callback_waiting();
 	send_pulse(DOWN);
+	// strap_log_event("/drive/backwards");
+
 }
 
 void down_deinit(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Down: deinit");
 	callback_waiting();
 	send_pulse(DOWN_D);
+	// strap_log_event("/stop");
+
 }
 
 void right_init(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Right init");
 	callback_waiting();
 	send_pulse(RIGHT);
+	// strap_log_event("/drive/right");
+
 }
 
 void right_deinit(ClickRecognizerRef recognizer, void *context){
 	text_layer_set_text(info_layer, "Right: deinit");
 	callback_waiting();
 	send_pulse(RIGHT_D);
+	// strap_log_event("/stop");
+
 }
 
 void left(ClickRecognizerRef recognizer, void *context){
@@ -56,10 +68,14 @@ void left(ClickRecognizerRef recognizer, void *context){
 	if(left_invert){
 		text_layer_set_text(info_layer, "Left: init");
 		send_pulse(LEFT);
+		// strap_log_event("/drive/left");
+
 	}
 	else{
 		text_layer_set_text(info_layer, "Left: deinit");
 		send_pulse(LEFT_D);
+		// strap_log_event("/stop");
+
 	}
 }
 
@@ -131,9 +147,12 @@ void init(){
 	
 	app_message_register_inbox_received(got_data);
 	app_message_open(512, 512);
+
+	// strap_init();
 }
 
 void deinit(){
+	// strap_deinit();
 	window_destroy(main_window);
 }
 	
